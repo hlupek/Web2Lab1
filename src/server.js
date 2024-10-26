@@ -7,9 +7,24 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const ticketRoutes = require('./routes/tickets');
 const rootRoutes = require('./routes/root');
+const db = require('./config/db');
+
+// code that creates a table if it doesn't exist
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS tickets (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    vatin VARCHAR(11) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+  );
+`;
+
+db.query(createTableQuery)
+
+
 
 const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
-
 const authConfig = {
     authRequired: false,
     auth0Logout: true,
