@@ -20,7 +20,6 @@ const createTableQuery = `
 `;
 
 db.query(createTableQuery)
-console.log(baseURL);
 
 const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const authConfig = {
@@ -38,5 +37,5 @@ app.use('/tickets', ticketRoutes);
 app.use('/', rootRoutes);
 
 app.listen(PORT, () => {
-    console.log(`Server je pokrenut na http://localhost:${PORT}`);
+    console.log(`Server je pokrenut sa baznim URL-om: ${baseURL}`);
 });
