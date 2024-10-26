@@ -20,8 +20,7 @@ const createTableQuery = `
 `;
 
 db.query(createTableQuery)
-
-
+console.log(baseURL);
 
 const baseURL = process.env.BASE_URL || `http://localhost:${PORT}`;
 const authConfig = {
