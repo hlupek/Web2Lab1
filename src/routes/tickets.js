@@ -51,13 +51,17 @@ router.get('/ticket/:ticketId', requiresAuth(), async (req, res) => {
 
         const ticket = result.rows[0];
         const formattedDate = new Date(ticket.created_at).toLocaleString();
+        const userName = req.oidc.user.name;
 
         res.send(`<h1>Ulaznica</h1>
                   <p>ID: ${ticket.id}</p>
                   <p>OIB: ${ticket.vatin}</p>
                   <p>Ime: ${ticket.first_name}</p>
                   <p>Prezime: ${ticket.last_name}</p>
-                  <p>Datum kreiranja: ${formattedDate}</p>`);
+                  <p>Datum kreiranja: ${formattedDate}</p>
+                  <br><br>
+                  <p>Prijavljeni ste kao: ${userName}</p>
+        `);
 
     } catch (error) {
         console.error(error);
